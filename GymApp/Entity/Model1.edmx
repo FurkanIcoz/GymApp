@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GymDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLANTRENORLER">
+          <Key>
+            <PropertyRef Name="antrenor_id" />
+          </Key>
+          <Property Name="antrenor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="antrenor_ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="antrenor_soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="antrenor_telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="antrenor_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="antrenor_adres" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="antrenor_dogumTarihi" Type="date" Nullable="false" />
+          <Property Name="antrenor_baslangicTarihi" Type="date" Nullable="false" />
+          <Property Name="antrenor_foto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="antrenor_aktif" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLBEDENBILGILERI">
+          <Key>
+            <PropertyRef Name="beden_id" />
+          </Key>
+          <Property Name="beden_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="beden_uyeID" Type="int" Nullable="false" />
+          <Property Name="boy" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="kilo" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="yagOrani" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="bel" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="kalca" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="gogus" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="kol" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="beden_tarih" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLGRUPDERSLER">
+          <Key>
+            <PropertyRef Name="grupders_id" />
+          </Key>
+          <Property Name="grupders_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grupders_ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="grupders_tarih" Type="date" Nullable="false" />
+          <Property Name="grupders_saat" Type="time" Precision="7" Nullable="false" />
+          <Property Name="grupders_antrenorID" Type="int" Nullable="false" />
+          <Property Name="grupders_kapasite" Type="int" Nullable="false" />
+          <Property Name="grupders_aktif" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="grupders_mevcut" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLOZELDERSLER">
+          <Key>
+            <PropertyRef Name="ozelders_id" />
+          </Key>
+          <Property Name="ozelders_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ozelders_tarih" Type="date" Nullable="false" />
+          <Property Name="ozelders_saat" Type="time" Precision="7" Nullable="false" />
+          <Property Name="ozelders_antrenorID" Type="int" Nullable="false" />
+          <Property Name="ozelders_aktif" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ozelders_uyeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUYEGRUPDERSLERI">
+          <Key>
+            <PropertyRef Name="uyegrupdersler_id" />
+          </Key>
+          <Property Name="uyegrupdersler_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyegrupdersler_uyeID" Type="int" Nullable="false" />
+          <Property Name="uyegrupdersler_grupdersID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUYELER">
+          <Key>
+            <PropertyRef Name="uye_id" />
+          </Key>
+          <Property Name="uye_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uye_ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uye_soyad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uye_telefon" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uye_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uye_dogumTarihi" Type="date" Nullable="false" />
+          <Property Name="uye_kayitTarihi" Type="date" Nullable="false" />
+          <Property Name="uye_bitisTarihi" Type="date" Nullable="false" />
+          <Property Name="uye_aktif" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uye_adres" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="uye_salonda" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="uye_foto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="uye_uyelikTipi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUYELIKTIPI">
+          <Key>
+            <PropertyRef Name="uyeliktipi_id" />
+          </Key>
+          <Property Name="uyeliktipi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyeliktipi_ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeliktipi_sure" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="uyeliktipi_fiyat" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TBLBEDENBILGILERI_TBLUYELER">
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="1" />
+          <End Role="TBLBEDENBILGILERI" Type="Self.TBLBEDENBILGILERI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLBEDENBILGILERI">
+              <PropertyRef Name="beden_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLGRUPDERSLER_TBLANTRENORLER">
+          <End Role="TBLANTRENORLER" Type="Self.TBLANTRENORLER" Multiplicity="1" />
+          <End Role="TBLGRUPDERSLER" Type="Self.TBLGRUPDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLANTRENORLER">
+              <PropertyRef Name="antrenor_id" />
+            </Principal>
+            <Dependent Role="TBLGRUPDERSLER">
+              <PropertyRef Name="grupders_antrenorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOZELDERSLER_TBLANTRENORLER">
+          <End Role="TBLANTRENORLER" Type="Self.TBLANTRENORLER" Multiplicity="1" />
+          <End Role="TBLOZELDERSLER" Type="Self.TBLOZELDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLANTRENORLER">
+              <PropertyRef Name="antrenor_id" />
+            </Principal>
+            <Dependent Role="TBLOZELDERSLER">
+              <PropertyRef Name="ozelders_antrenorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOZELDERSLER_TBLUYELER">
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="1" />
+          <End Role="TBLOZELDERSLER" Type="Self.TBLOZELDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLOZELDERSLER">
+              <PropertyRef Name="ozelders_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOZELDERSLER_TBLUYELER1">
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="1" />
+          <End Role="TBLOZELDERSLER" Type="Self.TBLOZELDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLOZELDERSLER">
+              <PropertyRef Name="ozelders_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER">
+          <End Role="TBLGRUPDERSLER" Type="Self.TBLGRUPDERSLER" Multiplicity="1" />
+          <End Role="TBLUYEGRUPDERSLERI" Type="Self.TBLUYEGRUPDERSLERI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLGRUPDERSLER">
+              <PropertyRef Name="grupders_id" />
+            </Principal>
+            <Dependent Role="TBLUYEGRUPDERSLERI">
+              <PropertyRef Name="uyegrupdersler_grupdersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLUYEGRUPDERSLERI_TBLUYELER">
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="1" />
+          <End Role="TBLUYEGRUPDERSLERI" Type="Self.TBLUYEGRUPDERSLERI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLUYEGRUPDERSLERI">
+              <PropertyRef Name="uyegrupdersler_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLUYELER_TBLUYELIKTIPI">
+          <End Role="TBLUYELIKTIPI" Type="Self.TBLUYELIKTIPI" Multiplicity="1" />
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELIKTIPI">
+              <PropertyRef Name="uyeliktipi_id" />
+            </Principal>
+            <Dependent Role="TBLUYELER">
+              <PropertyRef Name="uye_uyelikTipi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymDBModelStoreContainer">
+          <EntitySet Name="TBLANTRENORLER" EntityType="Self.TBLANTRENORLER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLBEDENBILGILERI" EntityType="Self.TBLBEDENBILGILERI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLGRUPDERSLER" EntityType="Self.TBLGRUPDERSLER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLOZELDERSLER" EntityType="Self.TBLOZELDERSLER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLUYEGRUPDERSLERI" EntityType="Self.TBLUYEGRUPDERSLERI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLUYELER" EntityType="Self.TBLUYELER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLUYELIKTIPI" EntityType="Self.TBLUYELIKTIPI" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLBEDENBILGILERI_TBLUYELER" Association="Self.FK_TBLBEDENBILGILERI_TBLUYELER">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLBEDENBILGILERI" EntitySet="TBLBEDENBILGILERI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLGRUPDERSLER_TBLANTRENORLER" Association="Self.FK_TBLGRUPDERSLER_TBLANTRENORLER">
+            <End Role="TBLANTRENORLER" EntitySet="TBLANTRENORLER" />
+            <End Role="TBLGRUPDERSLER" EntitySet="TBLGRUPDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOZELDERSLER_TBLANTRENORLER" Association="Self.FK_TBLOZELDERSLER_TBLANTRENORLER">
+            <End Role="TBLANTRENORLER" EntitySet="TBLANTRENORLER" />
+            <End Role="TBLOZELDERSLER" EntitySet="TBLOZELDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOZELDERSLER_TBLUYELER" Association="Self.FK_TBLOZELDERSLER_TBLUYELER">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLOZELDERSLER" EntitySet="TBLOZELDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOZELDERSLER_TBLUYELER1" Association="Self.FK_TBLOZELDERSLER_TBLUYELER1">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLOZELDERSLER" EntitySet="TBLOZELDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER" Association="Self.FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER">
+            <End Role="TBLGRUPDERSLER" EntitySet="TBLGRUPDERSLER" />
+            <End Role="TBLUYEGRUPDERSLERI" EntitySet="TBLUYEGRUPDERSLERI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLUYEGRUPDERSLERI_TBLUYELER" Association="Self.FK_TBLUYEGRUPDERSLERI_TBLUYELER">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLUYEGRUPDERSLERI" EntitySet="TBLUYEGRUPDERSLERI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLUYELER_TBLUYELIKTIPI" Association="Self.FK_TBLUYELER_TBLUYELIKTIPI">
+            <End Role="TBLUYELIKTIPI" EntitySet="TBLUYELIKTIPI" />
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GymDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLANTRENORLER">
+          <Key>
+            <PropertyRef Name="antrenor_id" />
+          </Key>
+          <Property Name="antrenor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="antrenor_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="antrenor_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="antrenor_telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="antrenor_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="antrenor_adres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="antrenor_dogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="antrenor_baslangicTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="antrenor_foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="antrenor_aktif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBLGRUPDERSLER" Relationship="Self.FK_TBLGRUPDERSLER_TBLANTRENORLER" FromRole="TBLANTRENORLER" ToRole="TBLGRUPDERSLER" />
+          <NavigationProperty Name="TBLOZELDERSLER" Relationship="Self.FK_TBLOZELDERSLER_TBLANTRENORLER" FromRole="TBLANTRENORLER" ToRole="TBLOZELDERSLER" />
+        </EntityType>
+        <EntityType Name="TBLBEDENBILGILERI">
+          <Key>
+            <PropertyRef Name="beden_id" />
+          </Key>
+          <Property Name="beden_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="beden_uyeID" Type="Int32" Nullable="false" />
+          <Property Name="beden_tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TBLUYELER" Relationship="Self.FK_TBLBEDENBILGILERI_TBLUYELER" FromRole="TBLBEDENBILGILERI" ToRole="TBLUYELER" />
+          <Property Name="boy" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="kilo" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="yagOrani" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="bel" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="kalca" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="gogus" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="kol" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="TBLGRUPDERSLER">
+          <Key>
+            <PropertyRef Name="grupders_id" />
+          </Key>
+          <Property Name="grupders_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grupders_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="grupders_tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="grupders_saat" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="grupders_antrenorID" Type="Int32" Nullable="false" />
+          <Property Name="grupders_kapasite" Type="Int32" Nullable="false" />
+          <Property Name="grupders_aktif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBLANTRENORLER" Relationship="Self.FK_TBLGRUPDERSLER_TBLANTRENORLER" FromRole="TBLGRUPDERSLER" ToRole="TBLANTRENORLER" />
+          <NavigationProperty Name="TBLUYEGRUPDERSLERI" Relationship="Self.FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER" FromRole="TBLGRUPDERSLER" ToRole="TBLUYEGRUPDERSLERI" />
+          <Property Name="grupders_mevcut" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLOZELDERSLER">
+          <Key>
+            <PropertyRef Name="ozelders_id" />
+          </Key>
+          <Property Name="ozelders_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ozelders_tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ozelders_saat" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ozelders_antrenorID" Type="Int32" Nullable="false" />
+          <Property Name="ozelders_aktif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBLANTRENORLER" Relationship="Self.FK_TBLOZELDERSLER_TBLANTRENORLER" FromRole="TBLOZELDERSLER" ToRole="TBLANTRENORLER" />
+          <Property Name="ozelders_uyeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLUYELER" Relationship="GymDBModel.FK_TBLOZELDERSLER_TBLUYELER" FromRole="TBLOZELDERSLER" ToRole="TBLUYELER" />
+          <NavigationProperty Name="TBLUYELER1" Relationship="GymDBModel.FK_TBLOZELDERSLER_TBLUYELER1" FromRole="TBLOZELDERSLER" ToRole="TBLUYELER" />
+        </EntityType>
+        <EntityType Name="TBLUYEGRUPDERSLERI">
+          <Key>
+            <PropertyRef Name="uyegrupdersler_id" />
+          </Key>
+          <Property Name="uyegrupdersler_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uyegrupdersler_uyeID" Type="Int32" Nullable="false" />
+          <Property Name="uyegrupdersler_grupdersID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLGRUPDERSLER" Relationship="Self.FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER" FromRole="TBLUYEGRUPDERSLERI" ToRole="TBLGRUPDERSLER" />
+          <NavigationProperty Name="TBLUYELER" Relationship="Self.FK_TBLUYEGRUPDERSLERI_TBLUYELER" FromRole="TBLUYEGRUPDERSLERI" ToRole="TBLUYELER" />
+        </EntityType>
+        <EntityType Name="TBLUYELER">
+          <Key>
+            <PropertyRef Name="uye_id" />
+          </Key>
+          <Property Name="uye_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uye_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_dogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="uye_kayitTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="uye_bitisTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="uye_aktif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_salonda" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uye_foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uye_uyelikTipi" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLBEDENBILGILERI" Relationship="Self.FK_TBLBEDENBILGILERI_TBLUYELER" FromRole="TBLUYELER" ToRole="TBLBEDENBILGILERI" />
+          <NavigationProperty Name="TBLUYEGRUPDERSLERI" Relationship="Self.FK_TBLUYEGRUPDERSLERI_TBLUYELER" FromRole="TBLUYELER" ToRole="TBLUYEGRUPDERSLERI" />
+          <NavigationProperty Name="TBLUYELIKTIPI" Relationship="Self.FK_TBLUYELER_TBLUYELIKTIPI" FromRole="TBLUYELER" ToRole="TBLUYELIKTIPI" />
+          <NavigationProperty Name="TBLOZELDERSLER" Relationship="GymDBModel.FK_TBLOZELDERSLER_TBLUYELER" FromRole="TBLUYELER" ToRole="TBLOZELDERSLER" />
+          <NavigationProperty Name="TBLOZELDERSLER1" Relationship="GymDBModel.FK_TBLOZELDERSLER_TBLUYELER1" FromRole="TBLUYELER" ToRole="TBLOZELDERSLER" />
+        </EntityType>
+        <EntityType Name="TBLUYELIKTIPI">
+          <Key>
+            <PropertyRef Name="uyeliktipi_id" />
+          </Key>
+          <Property Name="uyeliktipi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uyeliktipi_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uyeliktipi_sure" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uyeliktipi_fiyat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLUYELER" Relationship="Self.FK_TBLUYELER_TBLUYELIKTIPI" FromRole="TBLUYELIKTIPI" ToRole="TBLUYELER" />
+        </EntityType>
+        <Association Name="FK_TBLGRUPDERSLER_TBLANTRENORLER">
+          <End Role="TBLANTRENORLER" Type="Self.TBLANTRENORLER" Multiplicity="1" />
+          <End Role="TBLGRUPDERSLER" Type="Self.TBLGRUPDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLANTRENORLER">
+              <PropertyRef Name="antrenor_id" />
+            </Principal>
+            <Dependent Role="TBLGRUPDERSLER">
+              <PropertyRef Name="grupders_antrenorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOZELDERSLER_TBLANTRENORLER">
+          <End Role="TBLANTRENORLER" Type="Self.TBLANTRENORLER" Multiplicity="1" />
+          <End Role="TBLOZELDERSLER" Type="Self.TBLOZELDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLANTRENORLER">
+              <PropertyRef Name="antrenor_id" />
+            </Principal>
+            <Dependent Role="TBLOZELDERSLER">
+              <PropertyRef Name="ozelders_antrenorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLBEDENBILGILERI_TBLUYELER">
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="1" />
+          <End Role="TBLBEDENBILGILERI" Type="Self.TBLBEDENBILGILERI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLBEDENBILGILERI">
+              <PropertyRef Name="beden_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER">
+          <End Role="TBLGRUPDERSLER" Type="Self.TBLGRUPDERSLER" Multiplicity="1" />
+          <End Role="TBLUYEGRUPDERSLERI" Type="Self.TBLUYEGRUPDERSLERI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLGRUPDERSLER">
+              <PropertyRef Name="grupders_id" />
+            </Principal>
+            <Dependent Role="TBLUYEGRUPDERSLERI">
+              <PropertyRef Name="uyegrupdersler_grupdersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLUYEGRUPDERSLERI_TBLUYELER">
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="1" />
+          <End Role="TBLUYEGRUPDERSLERI" Type="Self.TBLUYEGRUPDERSLERI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLUYEGRUPDERSLERI">
+              <PropertyRef Name="uyegrupdersler_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLUYELER_TBLUYELIKTIPI">
+          <End Role="TBLUYELIKTIPI" Type="Self.TBLUYELIKTIPI" Multiplicity="1" />
+          <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELIKTIPI">
+              <PropertyRef Name="uyeliktipi_id" />
+            </Principal>
+            <Dependent Role="TBLUYELER">
+              <PropertyRef Name="uye_uyelikTipi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLANTRENORLER" EntityType="Self.TBLANTRENORLER" />
+          <EntitySet Name="TBLBEDENBILGILERI" EntityType="Self.TBLBEDENBILGILERI" />
+          <EntitySet Name="TBLGRUPDERSLER" EntityType="Self.TBLGRUPDERSLER" />
+          <EntitySet Name="TBLOZELDERSLER" EntityType="Self.TBLOZELDERSLER" />
+          <EntitySet Name="TBLUYEGRUPDERSLERI" EntityType="Self.TBLUYEGRUPDERSLERI" />
+          <EntitySet Name="TBLUYELER" EntityType="Self.TBLUYELER" />
+          <EntitySet Name="TBLUYELIKTIPI" EntityType="Self.TBLUYELIKTIPI" />
+          <AssociationSet Name="FK_TBLGRUPDERSLER_TBLANTRENORLER" Association="Self.FK_TBLGRUPDERSLER_TBLANTRENORLER">
+            <End Role="TBLANTRENORLER" EntitySet="TBLANTRENORLER" />
+            <End Role="TBLGRUPDERSLER" EntitySet="TBLGRUPDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOZELDERSLER_TBLANTRENORLER" Association="Self.FK_TBLOZELDERSLER_TBLANTRENORLER">
+            <End Role="TBLANTRENORLER" EntitySet="TBLANTRENORLER" />
+            <End Role="TBLOZELDERSLER" EntitySet="TBLOZELDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLBEDENBILGILERI_TBLUYELER" Association="Self.FK_TBLBEDENBILGILERI_TBLUYELER">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLBEDENBILGILERI" EntitySet="TBLBEDENBILGILERI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER" Association="Self.FK_TBLUYEGRUPDERSLERI_TBLGRUPDERSLER">
+            <End Role="TBLGRUPDERSLER" EntitySet="TBLGRUPDERSLER" />
+            <End Role="TBLUYEGRUPDERSLERI" EntitySet="TBLUYEGRUPDERSLERI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLUYEGRUPDERSLERI_TBLUYELER" Association="Self.FK_TBLUYEGRUPDERSLERI_TBLUYELER">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLUYEGRUPDERSLERI" EntitySet="TBLUYEGRUPDERSLERI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLUYELER_TBLUYELIKTIPI" Association="Self.FK_TBLUYELER_TBLUYELIKTIPI">
+            <End Role="TBLUYELIKTIPI" EntitySet="TBLUYELIKTIPI" />
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOZELDERSLER_TBLUYELER" Association="GymDBModel.FK_TBLOZELDERSLER_TBLUYELER">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLOZELDERSLER" EntitySet="TBLOZELDERSLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOZELDERSLER_TBLUYELER1" Association="GymDBModel.FK_TBLOZELDERSLER_TBLUYELER1">
+            <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+            <End Role="TBLOZELDERSLER" EntitySet="TBLOZELDERSLER" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_TBLOZELDERSLER_TBLUYELER">
+          <End Type="GymDBModel.TBLUYELER" Role="TBLUYELER" Multiplicity="1" />
+          <End Type="GymDBModel.TBLOZELDERSLER" Role="TBLOZELDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLOZELDERSLER">
+              <PropertyRef Name="ozelders_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOZELDERSLER_TBLUYELER1">
+          <End Type="GymDBModel.TBLUYELER" Role="TBLUYELER" Multiplicity="1" />
+          <End Type="GymDBModel.TBLOZELDERSLER" Role="TBLOZELDERSLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUYELER">
+              <PropertyRef Name="uye_id" />
+            </Principal>
+            <Dependent Role="TBLOZELDERSLER">
+              <PropertyRef Name="ozelders_uyeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GymDBModelStoreContainer" CdmEntityContainer="GymDBEntities">
+          <EntitySetMapping Name="TBLANTRENORLER">
+            <EntityTypeMapping TypeName="GymDBModel.TBLANTRENORLER">
+              <MappingFragment StoreEntitySet="TBLANTRENORLER">
+                <ScalarProperty Name="antrenor_id" ColumnName="antrenor_id" />
+                <ScalarProperty Name="antrenor_ad" ColumnName="antrenor_ad" />
+                <ScalarProperty Name="antrenor_soyad" ColumnName="antrenor_soyad" />
+                <ScalarProperty Name="antrenor_telefon" ColumnName="antrenor_telefon" />
+                <ScalarProperty Name="antrenor_email" ColumnName="antrenor_email" />
+                <ScalarProperty Name="antrenor_adres" ColumnName="antrenor_adres" />
+                <ScalarProperty Name="antrenor_dogumTarihi" ColumnName="antrenor_dogumTarihi" />
+                <ScalarProperty Name="antrenor_baslangicTarihi" ColumnName="antrenor_baslangicTarihi" />
+                <ScalarProperty Name="antrenor_foto" ColumnName="antrenor_foto" />
+                <ScalarProperty Name="antrenor_aktif" ColumnName="antrenor_aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLBEDENBILGILERI">
+            <EntityTypeMapping TypeName="GymDBModel.TBLBEDENBILGILERI">
+              <MappingFragment StoreEntitySet="TBLBEDENBILGILERI">
+                <ScalarProperty Name="kol" ColumnName="kol" />
+                <ScalarProperty Name="gogus" ColumnName="gogus" />
+                <ScalarProperty Name="kalca" ColumnName="kalca" />
+                <ScalarProperty Name="bel" ColumnName="bel" />
+                <ScalarProperty Name="yagOrani" ColumnName="yagOrani" />
+                <ScalarProperty Name="kilo" ColumnName="kilo" />
+                <ScalarProperty Name="boy" ColumnName="boy" />
+                <ScalarProperty Name="beden_id" ColumnName="beden_id" />
+                <ScalarProperty Name="beden_uyeID" ColumnName="beden_uyeID" />
+                <ScalarProperty Name="beden_tarih" ColumnName="beden_tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLGRUPDERSLER">
+            <EntityTypeMapping TypeName="GymDBModel.TBLGRUPDERSLER">
+              <MappingFragment StoreEntitySet="TBLGRUPDERSLER">
+                <ScalarProperty Name="grupders_mevcut" ColumnName="grupders_mevcut" />
+                <ScalarProperty Name="grupders_id" ColumnName="grupders_id" />
+                <ScalarProperty Name="grupders_ad" ColumnName="grupders_ad" />
+                <ScalarProperty Name="grupders_tarih" ColumnName="grupders_tarih" />
+                <ScalarProperty Name="grupders_saat" ColumnName="grupders_saat" />
+                <ScalarProperty Name="grupders_antrenorID" ColumnName="grupders_antrenorID" />
+                <ScalarProperty Name="grupders_kapasite" ColumnName="grupders_kapasite" />
+                <ScalarProperty Name="grupders_aktif" ColumnName="grupders_aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLOZELDERSLER">
+            <EntityTypeMapping TypeName="GymDBModel.TBLOZELDERSLER">
+              <MappingFragment StoreEntitySet="TBLOZELDERSLER">
+                <ScalarProperty Name="ozelders_uyeID" ColumnName="ozelders_uyeID" />
+                <ScalarProperty Name="ozelders_id" ColumnName="ozelders_id" />
+                <ScalarProperty Name="ozelders_tarih" ColumnName="ozelders_tarih" />
+                <ScalarProperty Name="ozelders_saat" ColumnName="ozelders_saat" />
+                <ScalarProperty Name="ozelders_antrenorID" ColumnName="ozelders_antrenorID" />
+                <ScalarProperty Name="ozelders_aktif" ColumnName="ozelders_aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLUYEGRUPDERSLERI">
+            <EntityTypeMapping TypeName="GymDBModel.TBLUYEGRUPDERSLERI">
+              <MappingFragment StoreEntitySet="TBLUYEGRUPDERSLERI">
+                <ScalarProperty Name="uyegrupdersler_id" ColumnName="uyegrupdersler_id" />
+                <ScalarProperty Name="uyegrupdersler_uyeID" ColumnName="uyegrupdersler_uyeID" />
+                <ScalarProperty Name="uyegrupdersler_grupdersID" ColumnName="uyegrupdersler_grupdersID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLUYELER">
+            <EntityTypeMapping TypeName="GymDBModel.TBLUYELER">
+              <MappingFragment StoreEntitySet="TBLUYELER">
+                <ScalarProperty Name="uye_id" ColumnName="uye_id" />
+                <ScalarProperty Name="uye_ad" ColumnName="uye_ad" />
+                <ScalarProperty Name="uye_soyad" ColumnName="uye_soyad" />
+                <ScalarProperty Name="uye_telefon" ColumnName="uye_telefon" />
+                <ScalarProperty Name="uye_email" ColumnName="uye_email" />
+                <ScalarProperty Name="uye_dogumTarihi" ColumnName="uye_dogumTarihi" />
+                <ScalarProperty Name="uye_kayitTarihi" ColumnName="uye_kayitTarihi" />
+                <ScalarProperty Name="uye_bitisTarihi" ColumnName="uye_bitisTarihi" />
+                <ScalarProperty Name="uye_aktif" ColumnName="uye_aktif" />
+                <ScalarProperty Name="uye_adres" ColumnName="uye_adres" />
+                <ScalarProperty Name="uye_salonda" ColumnName="uye_salonda" />
+                <ScalarProperty Name="uye_foto" ColumnName="uye_foto" />
+                <ScalarProperty Name="uye_uyelikTipi" ColumnName="uye_uyelikTipi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLUYELIKTIPI">
+            <EntityTypeMapping TypeName="GymDBModel.TBLUYELIKTIPI">
+              <MappingFragment StoreEntitySet="TBLUYELIKTIPI">
+                <ScalarProperty Name="uyeliktipi_id" ColumnName="uyeliktipi_id" />
+                <ScalarProperty Name="uyeliktipi_ad" ColumnName="uyeliktipi_ad" />
+                <ScalarProperty Name="uyeliktipi_sure" ColumnName="uyeliktipi_sure" />
+                <ScalarProperty Name="uyeliktipi_fiyat" ColumnName="uyeliktipi_fiyat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
